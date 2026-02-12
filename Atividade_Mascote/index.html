@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Mascote JS</title>
+<style>
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+background-color: #f0f2f5;
+}
+.container {
+background-color: white;
+padding: 30px;
+border-radius: 20px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+text-align: center;
+width: 350px;
+}
+#imagem-mascote {
+font-size: 80px;
+margin-bottom: 20px;
+display: block;
+}
+.status-container {
+margin-bottom: 20px;
+text-align: left;
+}
+.barra-fundo {
+background-color: #eee;
+border-radius: 10px;
+height: 20px;
+width: 100%;
+margin-top: 5px;
+}
+.barra-progresso {
+height: 100%;
+border-radius: 10px;
+transition: width 0.5s ease;
+
+}
+#fome-barra { background-color: #ff4757; width: 50%; }
+#felicidade-barra { background-color: #ffa502; width: 50%; }
+.controles {
+display: flex;
+gap: 10px;
+justify-content: center;
+}
+button {
+padding: 10px 20px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-weight: bold;
+transition: transform 0.2s;
+}
+button:active { transform: scale(0.95); }
+.btn-comer { background-color: #2ed573; color: white; }
+.btn-brincar { background-color: #1e90ff; color: white; }
+#mensagem {
+margin-top: 20px;
+color: #57606f;
+font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Amigo Digital</h1>
+<div id="imagem-mascote"> </div>
+<div class="status-container">
+<label>Energia (Fome):</label>
+<div class="barra-fundo">
+<div id="fome-barra" class="barra-progresso"></div>
+</div>
+</div>
+<div class="status-container">
+<label>Felicidade:</label>
+<div class="barra-fundo">
+<div id="felicidade-barra" class="barra-progresso"></div>
+
+</div>
+</div>
+<div class="controles">
+<button class="btn-comer" onclick="alimentar()"> Alimentar</button>
+<button class="btn-brincar" onclick="brincar()"> Brincar</button>
+</div>
+<p id="mensagem">Olá! Vamos programar?</p>
+</div>
+<script>
+// 1. Criando o Objeto Mascote (Lógica de Programação)
+const mascote = {
+nome: "Amora",
+fome: 50,
+felicidade: 50,
+emoji: "🐶"
+};
+// 2. Função para atualizar a tela (DOM)
+function atualizarInterface() {
+// Atualiza as barras visualmente
+document.getElementById('fome-barra').style.width = mascote.fome + "%";
+document.getElementById('felicidade-barra').style.width = mascote.felicidade + "%";
+// Lógica condicional (IF/ELSE) para mudar o humor do mascote
+const img = document.getElementById('imagem-mascote');
+const msg = document.getElementById('mensagem');
+if (mascote.fome >= 80 && mascote.felicidade >= 80) {
+img.innerText = " ";
+msg.innerText = mascote.nome + " está radiante!";
+} else if (mascote.fome <= 20) {
+img.innerText = " ";
+msg.innerText = mascote.nome + " precisa de energia...";
+} else {
+img.innerText = " ";
+msg.innerText = "O que vamos fazer agora?";
+}
+}
+// 3. Funções de Ação
+function alimentar() {
+if (mascote.fome < 100) {
+mascote.fome += 20;
+atualizarInterface();
+}
+
+}
+function brincar() {
+if (mascote.felicidade < 100) {
+mascote.felicidade += 20;
+// Brincar gasta um pouco de energia (fome diminui)
+mascote.fome -= 5;
+atualizarInterface();
+}
+}
+</script>
+</body>
+</html>
